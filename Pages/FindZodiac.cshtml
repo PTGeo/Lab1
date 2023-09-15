@@ -1,0 +1,33 @@
+@page
+@model Lab1.Pages.FindZodiac
+@{
+    ViewData["Title"] = "Find the Zodiac";
+}
+<h1>@ViewData["Title"]</h1>
+<div>
+    <form method="post">
+        <label asp-for="Number" class="control-label"></label><br>
+        <input type="number" id="numberInput" asp-for="Number" class="form-control"><br>
+        <button type="submit" value="Submit" asp-page-handler="Submit" class="btn btn-primary">Get Zodiac</button>
+        <a asp-action="" class="btn btn-success">Clear</a>
+    </form>
+</div>
+@if (!@Model.ShowDefault)
+{
+    <div class="container" style="width: fit-content; margin: 20px;">
+        @if (@Model.IsValid)
+        {
+            <div class="alert alert-success">
+                <h3>Your Zodiac is <b>@Model.Zodiac</b></h3>
+                <p><img src="@Model.ImgSource" alt="Zodiac" style="width:200px"></p>
+            </div>
+        }
+        else if (!@Model.IsValid)
+        {
+            <div class="alert alert-danger">
+                Year must be between 1900 and next year.<br> Please try again.
+            </div>
+        }
+
+    </div>
+}
